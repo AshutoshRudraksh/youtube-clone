@@ -4,28 +4,25 @@
 import { Storage } from "@google-cloud/storage";
 import fs from 'fs';
 import ffmpeg from 'fluent-ffmpeg';
-import { setupDirectories } from "./storage"
 
-setupDirectories(); 
+
 // creating instance of Google cloud storage
+
 const storage = new Storage();
-
-// declare buckets
-// download bucket and upload bucket
-const rawVideoBucketName = "neetcode-yt-raw-videos";
-const processedVideoBucketName = "neetcode-yt-processed-videos";
-
-// defining local path to store and process downloaded video 
-const localRawVideopath = "./raw-video";
-const localProcessedVideoPath = "./processed-videos";
-
 
 /**
  * *create the local directories for raw and processed videos.
  */
+const rawVideoBucketName = '{replace with your filename}';
+const processedVideoBucketName = "{replace fileName}";
+
+const localRawVideoPath = "./raw-videos";
+const localProcessedVideoPath = "./processed-videos";
+
+
 
 export function setupDirectories() {
-	ensureDirectoryExistence(localRawVideopath);
+	ensureDirectoryExistence(localRawVideoPath);
 	ensureDirectoryExistence(localProcessedVideoPath);
 };
 
@@ -48,7 +45,7 @@ export function convertVideo(rawVideoName: string, processedVideoName: string){
 			console.log("An error occurred: " + err.message);
 			reject(err);
 		})
-		.save('${localProcessedVideoPath}/${processedVideoName}');
+		.save(`${localProcessedVideoPath}/${processedVideoName}`);
 	});
 }
 
@@ -127,7 +124,7 @@ function deleteFile(filePath: string): Promise<void> {
 					console.error(`Failed to delete file at ${filePath}`, err);
 					reject(err);
 				} else{
-					console.log('File deleted at ${filePath}');
+					console.log(`File deleted at ${filePath}`);
 					resolve();
 				} 
 			});
@@ -148,7 +145,7 @@ function deleteFile(filePath: string): Promise<void> {
 function ensureDirectoryExistence(dirPath: string){
 	if (!fs.existsSync(dirPath)){
 		fs.mkdirSync(dirPath, {recursive: true}); // recursive: true enable creating
-		console.log('Directory created at ${dirPath}');
+		console.log(`Directory created at ${dirPath}`);
 	}
 }
 
