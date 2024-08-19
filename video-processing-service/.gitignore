@@ -1,2 +1,4 @@
+# Ignore Node js files
 node_modules
+# Ignore Google Cloud SDK files
 google-cloud-sdk
