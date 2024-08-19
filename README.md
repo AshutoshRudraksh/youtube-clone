@@ -71,7 +71,60 @@
         why use kill -9 <PID>? 
             $ kill -9 <PID>: Forcefully terminates the process without allowing it to clean up.
             kill <PID>: Gracefully requests the process to terminate, allowing it to clean up resources.
-    
+    -
 
-    
+// when you want to run the code :
+//      -- $npm run start
+//      -- you need to have some video at the video processing service
+directory 
+// note -- the path of the video matter should not be in the src dir because we run the npm commond from the the same dir as the video is in
+
+
+To test this one out using thunder client API using extention 
+    -Install Thunder Client in VSCode and send a request to test it out. The request URL:
+    - In the new Request we going to select "POST" request -> 
+        POST http://localhost:3000/process-video
+
+        The request JSON body:
+
+        {
+        "inputFilePath": "./nc-intro.mp4",
+        "outputFilePath": "./processed-nc-intro.mp4"
+        }
+    NOTE: don't forget to add the middleware :
+        app.use(exprees.json)
+
+# deploying the video processing service using docker container: 
+It can be difficult to deploy apps and ensure they have all the dependencies they need.
+    why docker? 
+    -> Containers allow us to package our app and all its dependencies into a single image. We  can then  run this image on any machine that has Docker installed.
+    For now, we will do so locally. But later on we will deploy our image to Google Cloud Run, which is specifically designed for running containerized apps.
+
+# create a dockerfile
+    - use parent(base) image-> node: 18 (built on linux system it's like running operating system ).
+    - contianer has as file system so set up working dir.
+    - docker image is used to instantiate containers : dock file (blueprint for)->dock image->(blueprint for) multiple container -> run or code in its isolated env/file-system
+
+# convert videos hosted on google cloud storage
+    - install cloud storage client library
+        $npm install @google-cloud/storage
+    -  to separate code create new file storage.ts
+           1. GCS file interactions 
+           2. local file interactions
+    - import the necessary packages and libraries (storage, fs, ffmpeg)
+    - create local directory for raw and processed videos
+    - define constants/ instace for  GCS 
+    - conversion code separately 
+    - use simple api for converting(localbucket->processVideoName) used   within index.ts
+    - create convert video funtion in storage.ts
+    - create a popup message to know if the error ocurred or operation completed successfully
+    - file system operations: download raw video from raw video bucket; upload video from local processed vido bucket.  (make sure to specify buckets/action/destination folder/ )
+    - make it public 
+    - Given the local file path -> delete the file
+    - Ensure a drectory exists, creating it if necessary
+    - get the bucket and filename from the cloud pub/sub 
+    - Download the video from google cloud
+    - processing -> convert the video tp 360px
+    - upload the process video to cloud
+    - 
 
