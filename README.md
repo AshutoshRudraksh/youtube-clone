@@ -2,7 +2,7 @@
 
 Welcome to the YouTube Clone project! This initiative aims to provide a comprehensive understanding of backend development, cloud services, RESTful APIs, and search engine functionalities.
 
-## 🚀 What You'll Gain
+## 🚀 What did I learn building this project:
 
 By completing this project, you'll acquire:
 
