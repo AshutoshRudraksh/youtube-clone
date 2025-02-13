@@ -1,4 +1,4 @@
-# 🎥 YouTube Clone Project (In building phase...)
+# 🎥 YouTube Clone Project
 
 Welcome to the YouTube Clone project! This initiative aims to provide a comprehensive understanding of backend development, cloud services, RESTful APIs, and search engine functionalities.
 
